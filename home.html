@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset='utf-8'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+    <title>POJIR</title>
+       <style>
+	  #map{
+		    margin: auto;
+         }
+		img.tengah {
+    display: block;
+    margin-left: auto;
+	margin-right: auto;
+}
+        </style>
+    </head>
+    <body bgcolor= #7FFFD4>
+<center>
+<marquee bgcolor="white" scrollamount="15" width="100%"><font size="100" face="verdana">SIG Potensi Banjir Kabupaten Pringsewu</font></marquee>
+</center>
+<div id='cssmenu'>
+<ul>
+   <li><a href='search.html'><span>Search</span></a></li>
+   <li><a href='rawan.html'><span>Tampilan Daerah Rawan Banjir</span></a></li>
+   <li><a href='titik.html'><span>Filter Titik Banjir</span></a></li>
+   <li><a href='elevation.html'><span>Elevation</span></a></li>
+   <img class="tengah" src="pj.JPG">
+   </ul>
+</div>
+<center>
+<font size="5" face="verdana">Potensi Banjir Kabupaten Pringsewu</font>
+</center>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUmP8vlua-pGMjYA1RLUnkk1pTSRm14gE&callback=initMap"></script>
+<body>
+		<center><div id="map" style="width:100%;height:498px;"></div></center>
+          <script>
+            // This example creates a custom overlay called USGSOverlay, containing
+            // a U.S. Geological Survey (USGS) image of the relevant area on the map.
+      
+            // Set the custom overlay object's prototype to a new instance
+            // of OverlayView. In effect, this will subclass the overlay class therefore
+            // it's simpler to load the API synchronously, using
+            // google.maps.event.addDomListener().
+            // Note that we set the prototype to an instance, rather than the
+            // parent class itself, because we do not wish to modify the parent class.
+      
+            var overlay;
+            USGSOverlay.prototype = new google.maps.OverlayView();
+      
+            // Initialize the map and the custom overlay.
+      
+            function initMap() {
+              var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: {lat: -5.4211207, lng: 105.2520953},
+                mapTypeId: 'roadmap'
+              });
+      
+              var bounds = new google.maps.LatLngBounds(
+                  new google.maps.LatLng(-5.4349129,105.1825665),
+                  new google.maps.LatLng(-5.371302,105.243629));
+      
+              var srcImage = 'peta.jpg';
+              overlay = new USGSOverlay(bounds, srcImage, map);
+            }
+      
+            function USGSOverlay(bounds, image, map) {
+      
+              this.bounds_ = bounds;
+              this.image_ = image;
+              this.map_ = map;
+              this.div_ = null;
+              this.setMap(map);
+            }
+            USGSOverlay.prototype.onAdd = function() {
+      
+              var div = document.createElement('div');
+              div.style.borderStyle = 'none';
+              div.style.borderWidth = '0px';
+              div.style.position = 'absolute';
+      
+              var img = document.createElement('img');
+              img.src = this.image_;
+              img.style.width = '100%';
+              img.style.height = '100%';
+              img.style.position = 'absolute';
+              div.appendChild(img);
+      
+              this.div_ = div;
+      
+              // Add the element to the "overlayLayer" pane.
+              var panes = this.getPanes();
+              panes.overlayLayer.appendChild(div);
+            };
+      
+            USGSOverlay.prototype.draw = function() {
+              var overlayProjection = this.getProjection();
+              var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+              var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+      
+              var div = this.div_;
+              div.style.left = sw.x + 'px';
+              div.style.top = ne.y + 'px';
+              div.style.width = (ne.x - sw.x) + 'px';
+              div.style.height = (sw.y - ne.y) + 'px';
+            };
+      
+            USGSOverlay.prototype.onRemove = function() {
+              this.div_.parentNode.removeChild(this.div_);
+              this.div_ = null;
+            };
+      
+            google.maps.event.addDomListener(window, 'load', initMap);
+          </script>
+      <div id="map"></div>
+<table bgcolor="white" border=1>
+<tr>
+<td><div style='text-align:justify;'><img class="tengah" src="1.png">Mayoritas kecamatan di Kabupaten Pringsewu menyimpan potensi banjir. Untuk itu warga harus tetap waspada terlebih lagi pada musim penghujan, Berdasarkan pemetaan yang dilakukan Badan Penanggulangan Bencana Daerah (BPBD) Pringsewu, tujuh dari sembilan kecamatan di wilayah otonomi baru ini berpotensi banjir. "Mayoritas kecamatan di Kabupaten Pringsewu seperti, Kecamatan Gadingrejo, Pringsewu, Ambarawa, Pardasuka, Sukoharjo, Banyumas dan Kecamatan Pagelaran" memiliki potensi banjir.
+Namun potensi banjir tak menyeluruh hanya ada sejumlah titik di masing-masing kecamatan. Untuk Kecamatan Gadingrejo titik banjir yakni di Pekon Wates, Tambahrejo, dan Parerejo.
+Sementara di ibukota kabupaten yakni Kecamatan Pringsewu titik banjir umumnya di beberapa ruas jalan. "Umumnya berpotensi genangan saat hujan dan di lingkungan Kelurahan Pringsewu Timur" namun tidak begitu parah,
+Untuk Kecamatan Ambarawa, titik banjir di Pekon Ambarawa. Umumnya yang berpotensi terendam yakni areal persawah. Potensi banjir ini juga terkait dengan Kecamatan Pardasuka. Yakni di titik alur sungai Way Mincang, Pekon Pardasuka, jalan menuju Pekon Pujodadi menuju arah Pekon Kresnomulyo, ”Wilayah ini merupakan yang sering terendam banjir”.
+Begitu juga dengan Kecamatan Sukoharjo. Di kecamatan ini yang berpotensi terendam air yakni areal persawahan. "Sumbernya alur sungai Way Oyot, Pekon Sukoharjo III" bisa meluap sampai ke sawah dan badan jalan.
+Untuk di Kecamatan Banyumas, rendaman air juga berpotensi namun bila curah hujan tinggi. Sungai Way Wayah bila curah tinggi bisa meluap sampai sawah. Untuk Kecamatan Pagelaran tetap ada potensi terendam air namun tidak banyak.
+Dari penelahan BPBD, meluapnya air hingga merendam persawahan dan perumahan dipicu sendimentasi, dimana saat curah hujan tinggi material lumpur ikut terbawa dan mengendap di sungai. Termasuk sampah juga berpotensi mengakibatkan banjir.
+”Kesadaran masyarakat untuk tak membuang sampah di sungai termasuk saluran drainase atau sembarangan diperlukan. Sehingga saat hujan turun aliran air dapat lancar”.
+Sementara untuk banjir di Pekon Wates dan Kecamatan Gadingrejo merupakan daerah yang berpotensi banjir juga karena daerah ini sudah pernah terendam banjir.
+</td>
+</tr>
+</table>
+<center>
+<font size="2%" face="verdana">Ilham Hardiyanto|Muhammad Naufal Humam|Rendi Eko Prasatiawan</font>
+</center>
+</body>
+</html>
