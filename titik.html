@@ -1,1 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset='utf-8'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+   <title>POJIR</title>
+    <style>
+	   #map{
+            width: 100%;
+            height: 475px;
+		    margin: auto;
+         }
+		 		img.tengah {
+    display: block;
+    margin-left: auto;
+	margin-right: auto;
+}
+    </style>
+	</head>
+    <body bgcolor= #7FFFD4>
+<center>
+<marquee bgcolor="white" scrollamount="15" width="100%"><font size="100" face="verdana">SIG Potensi Banjir Kabupaten Pringsewu</font></marquee>
+</center>
+<div id='cssmenu'>
+<ul>
+   <li><a href='home.html'><span>HOME</span></a></li>
+   <li><a href='search.html'><span>Search</span></a></li>
+   <li><a href='rawan.html'><span>Tampilan Daerah Rawan Banjir</span></a></li>
+   <li><a href='elevation.html'>Elevation</span></a></li>
+   <img class="tengah" src="pj.JPG">
+   </ul>
+</div>
+<center>
+<font size="5" face="verdana">Filter Titik Banjir</font>
+</center>     
+    <body>
+        <div id="map"></div>
+        <button onclick="lampungBarat()">Desa 1</button>
+        <button onclick="tanggamus()">Desa 2</button>
+        <button onclick="titik3()">Desa 3</button>
+        <button onclick="titik4()">Desa 4</button>
+        <button onclick="titik5()">Desa 5</button>
+        <button onclick="titik6()">Desa 6</button>
+    </body>
+			<center>
+<font size="2%" face="verdana">Ilham Hardiyanto|Muhammad Naufal Humam|Rendi Eko Prasatiawan</font>
+</center>
+    
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcpcs7wCvVPtT2yziQZ3KVdXsaJUVKY7k&libraries=places&callback=initAutocomplete"
+    async defer></script>
+                    <script>
 
+                          var config = {
+                        apiKey: "AIzaSyCpeKj5CAWtdtqY1ip1JJIo6MqAzT3JrRI",
+                        authDomain: "praktikumsig-d0078.firebaseapp.com",
+                        databaseURL: "https://praktikumsig-d0078.firebaseio.com",
+                        projectId: "praktikumsig-d0078",
+                        storageBucket: "praktikumsig-d0078.appspot.com",
+                        messagingSenderId: "956267106881"
+                        };
+                        firebase.initializeApp(config);
+                        var db              = firebase.database();
+                        var dataRef0         = db.ref().child('pringsewu').child('features').child('0');
+                        var dataRef1         = db.ref().child('pringsewu').child('features').child('1');
+                        var dataRef2         = db.ref().child('pringsewu').child('features').child('2');
+                        var dataRef3         = db.ref().child('pringsewu').child('features').child('3');
+                        var dataRef4         = db.ref().child('pringsewu').child('features').child('53');
+                        var dataRef5         = db.ref().child('pringsewu').child('features').child('22');
+                        function initMap(){
+                            map = new google.maps.Map(document.getElementById('map'),{
+                                zoom : 13,
+                                center : center
+                            });
+
+                            infowindow = new google.maps.InfoWindow();
+                        }
+
+                        function lampungBarat() {
+                            map = new google.maps.Map(document.getElementById('map'),{
+                                zoom : 10,
+                                center : {lng:104.927204, lat:-5.548023}
+                            });
+
+                            infowindow = new google.maps.InfoWindow();
+                            dataRef0.on('value',showData0);
+                        }
+
+                        
+                        function showData0(data){
+                            map.data.addGeoJson(data.val());
+                            map.data.setStyle({fillColor:'#fe1',strokeWeight: 0.8});
+                            
+                            map.data.addListener('click',function(event){
+                                infowindowcontent = event.feature.getProperty('DESA');
+                                infowindow.setContent(infowindowcontent);
+                                infowindow.setPosition(event.latLng);
+                                infowindow.open(map);
+                            });
+                            
+                        }
+
+function tanggamus() {
+    map = new google.maps.Map(document.getElementById('map'),{
+        zoom : 10,
+        center : {lat:-5.462447, lng:104.652267}
+    });
+
+    infowindow = new google.maps.InfoWindow();
+    dataRef1.on('value',showData1);
+}
+
+function showData1(data){
+    map.data.addGeoJson(data.val());
+    map.data.setStyle({fillColor:'#fe1',strokeWeight: 0.8});
+    
+    map.data.addListener('click',function(event){
+        infowindowcontent = event.feature.getProperty('DESA');
+        infowindow.setContent(infowindowcontent);
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+    });
+    
+}
+function titik3() {
+    map = new google.maps.Map(document.getElementById('map'),{
+        zoom : 10,
+        center : {lat:-5.246150, lng:104.810442}
+    });
+
+    infowindow = new google.maps.InfoWindow();
+    dataRef2.on('value',showData2);
+}
+
+function showData2(data){
+    map.data.addGeoJson(data.val());
+    map.data.setStyle({fillColor:'#fe1',strokeWeight: 0.8});
+    
+    map.data.addListener('click',function(event){
+        infowindowcontent = event.feature.getProperty('DESA');
+        infowindow.setContent(infowindowcontent);
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+    });
+}
+
+function titik4() {
+    map = new google.maps.Map(document.getElementById('map'),{
+        zoom : 10,
+        center : {lat:-5.285567, lng:104.857137}
+    });
+
+    infowindow = new google.maps.InfoWindow();
+    dataRef3.on('value',showData3);
+}
+
+function showData3(data){
+    map.data.addGeoJson(data.val());
+    map.data.setStyle({fillColor:'#fe1',strokeWeight: 0.8});
+    
+    map.data.addListener('click',function(event){
+        infowindowcontent = event.feature.getProperty('DESA');
+        infowindow.setContent(infowindowcontent);
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+    });
+}
+function titik5() {
+    map = new google.maps.Map(document.getElementById('map'),{
+        zoom : 10,
+        center : {lat:-5.248931278999976, lng:105.04531433300008}
+    });
+
+    infowindow = new google.maps.InfoWindow();
+    dataRef4.on('value',showData4);
+}
+
+function showData4(data){
+    map.data.addGeoJson(data.val());
+    map.data.setStyle({fillColor:'#fe1',strokeWeight: 0.8});
+    
+    map.data.addListener('click',function(event){
+        infowindowcontent = event.feature.getProperty('DESA');
+        infowindow.setContent(infowindowcontent);
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+    });
+}
+function titik6() {
+    map = new google.maps.Map(document.getElementById('map'),{
+        zoom : 10,
+        center : {lat:-5.359052376999955, lng:104.88695194600007}
+    });
+
+    infowindow = new google.maps.InfoWindow();
+    dataRef5.on('value',showData5);
+}
+
+function showData5(data){
+    map.data.addGeoJson(data.val());
+    map.data.setStyle({fillColor:'#fe1',strokeWeight: 0.8});
+    
+    map.data.addListener('click',function(event){
+        infowindowcontent = event.feature.getProperty('DESA');
+        infowindow.setContent(infowindowcontent);
+        infowindow.setPosition(event.latLng);
+        infowindow.open(map);
+    });
+}
+    </script>
+	</body>
+</html>
